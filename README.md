@@ -1,4 +1,4 @@
-![]()
+![](public/banner.png)
 
 # Sander's Portfolio
 
