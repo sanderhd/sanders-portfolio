@@ -2,6 +2,15 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
+export interface Project {
+    slug: string;
+    title: string;
+    description: string;
+    languages: string;
+    thumbnail: string;
+    date: string;
+}
+
 const projectsDir = path.join(process.cwd(), "src/content/projects");
 
 export function getProjectBySlug(slug: string) {
@@ -17,7 +26,7 @@ export function getProjectBySlug(slug: string) {
     };
 }
 
-export function getAllProjects() {
+export function getAllProjects(): Project[] {
     return fs.readdirSync(projectsDir).map((file) => {
         const slug = file.replace(".md", "");
         const fileContent = fs.readFileSync(path.join(projectsDir, file), "utf-8");
@@ -26,6 +35,6 @@ export function getAllProjects() {
         return {
             slug,
             ...data,
-        };
+        } as Project;
     });
 }
