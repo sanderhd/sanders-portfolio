@@ -3,19 +3,31 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Project } from "@/lib/projects";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function ProjectsList({ projects }: { projects: Project[] }) {
+    const [repoCount, setRepoCount] = useState<number | null>(null);
+
+    useEffect(() => {
+        fetch("https://api.github.com/users/sanderhd")
+            .then((res) => res.json())
+            .then((data) => setRepoCount(data.public_repos))
+            .catch(() => setRepoCount(null));
+    }, []);
+    
     return (
         <div>
-            <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-
             <motion.section
                 initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="flex min-h-screen flex-col items-center justify-center gap-6 px-4"
+                className="flex flex-col items-center gap-6 px-4 py-75"
             >
                 <h1 className="text-3xl font-bold text-white">Projects</h1>
+                <h2 className="text-sm text-white/40 font-normal">
+                    I've published <span className="text-gray-400 font-semibold">{repoCount ?? "..."}</span> public projects on my <Link href="https://github.com/sanderhd" key="github" className="text-gray-300 font-bold transition hover:text-gray-400 ">github</Link>
+                </h2>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-4xl">
                     {projects.map((p) => (
@@ -30,12 +42,16 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                                         className="border-b border-white/10 object-cover"
                                     />
                                     </div>
-                                <div className="space-y-1 p-4">
-                                    <h2 className="overflow-hidden text-ellipsis text-nowrap font-semibold text-white transition-colors group-hover:text-purple-300 group-focus:text-purple-300">
+                                <div className="flex flex-col h-full p-4">
+                                    <h2 className="overflow-hidden text-ellipsis text-nowrap font-semibold text-white transition-colors group-hover:text-gray-300 group-focus:text-gray-300">
                                         {p.title}
                                     </h2>
 
                                     <p className="overflow-hidden text-ellipsis text-nowrap text-sm text-white/60">{p.description}</p>
+
+                                    <div className="flex justify-end mt-3">
+                                        <ArrowRight size={14} className="text-white/40 transition-all duration-200 group-hover:translate-x-1 group-hover:text-gray-300 group-focus:translate-x-1 goup-focus:text-gray-300"/>
+                                    </div>
                                 </div>
                             </div>
                         </Link>

@@ -3,6 +3,8 @@
 import { GitCommit, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Navbar from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 const socials = [
     { href: "https://github.com/sanderhd", label: "Github", icon: GitCommit },
@@ -12,7 +14,9 @@ const socials = [
 export default function Home() {
     return (
         <div>
-            <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+            <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(64,64,64,0.4),rgba(255,255,255,0))]" />
+
+            <Navbar />
 
             <motion.section
                 initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
@@ -36,6 +40,7 @@ export default function Home() {
                     </div>
                 </div>
             </motion.section>
+            <Footer />
         </div>
     );
 }
