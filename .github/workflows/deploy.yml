@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Pull Code
+        run: git pull origin main
+
       - name: Deploy
         run: |
           docker compose down
