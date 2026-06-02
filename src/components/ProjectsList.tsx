@@ -49,6 +49,17 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
 
                                     <p className="overflow-hidden text-ellipsis text-nowrap text-sm text-white/60">{p.description}</p>
 
+                                    <div className="flex flex-wrap gap-2 mt-3">
+                                        {(Array.isArray(p.languages) ? p.languages : []).map((lang) => (
+                                            <span
+                                                key={lang}
+                                                className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70 transition hover:bg-white/10 hover:border-white/20"
+                                            >
+                                                {lang}
+                                            </span>
+                                        ))}
+                                    </div>
+
                                     <div className="flex justify-end mt-3">
                                         <ArrowRight size={14} className="text-white/40 transition-all duration-200 group-hover:translate-x-1 group-hover:text-gray-300 group-focus:translate-x-1 goup-focus:text-gray-300"/>
                                     </div>

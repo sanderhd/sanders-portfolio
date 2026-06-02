@@ -8,7 +8,7 @@ export interface Project {
     description: string;
     featured: boolean;
     git: string;
-    languages: string;
+    languages: string[];
     thumbnail: string;
     date: string;
 }
@@ -36,8 +36,14 @@ export function getAllProjects(): Project[] {
         
         return {
             slug,
-            ...data,
-        } as Project;
+            title: data.title,
+            description: data.description,
+            featured: data.featured,
+            git: data.git,
+            languages: data.languages ?? [],
+            thumbnail: data.thumbnail,
+            date: data.date,
+        } satisfies Project;
     });
 }
 
@@ -49,8 +55,14 @@ export function getFeaturedProjects(): Project[] {
 
         return {
             slug,
-            ...data,
-        } as Project;
+            title: data.title,
+            description: data.description,
+            featured: data.featured,
+            git: data.git,
+            languages: data.languages ?? [],
+            thumbnail: data.thumbnail,
+            date: data.date,
+        } satisfies Project;
     })
     .filter((project) => project.featured === true);
 }
