@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "@/components/Navigation";
 
 declare global {
@@ -12,18 +12,6 @@ declare global {
 export default function Contact() {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [token, setToken] = useState("");
-
-    useEffect(() => {
-        window.onTurnstileSuccess = (token: string) => {
-            setToken(token);
-        };
-
-        const script = document.createElement("script");
-        script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-        script.async = true;
-        document.body.appendChild(script);
-    }, []);
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -38,8 +26,7 @@ export default function Contact() {
             body: JSON.stringify({
                 name: form.get("name"),
                 email: form.get("email"),
-                message: form.get("message"),
-                token,
+                message: form.get("message")
             }),
         });
 
@@ -79,14 +66,6 @@ export default function Contact() {
                     rows={5} 
                     placeholder="Message"
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white" 
-                />
-
-                <div
-                    className="cf-turnstile"
-                    data-sitekey="0x4AAAAAADdtiGFMKAtTrt4y"
-                    data-theme="dark"
-                    data-size="flexible"
-                    data-callback="onTurnstileSuccess"
                 />
 
                 <button

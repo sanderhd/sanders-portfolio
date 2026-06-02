@@ -27,8 +27,6 @@ WORKDIR /app
 COPY --from=dependencies /app/node_modules ./node_modules
 
 COPY . .
-ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY
-ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
 ENV NODE_ENV=production
 
 RUN if [ -f package-lock.json ]; then \
