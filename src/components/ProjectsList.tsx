@@ -41,7 +41,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                                         fill
                                         className="border-b border-white/10 object-cover"
                                     />
-                                    </div>
+                                </div>
                                 <div className="flex flex-col h-full p-4">
                                     <h2 className="overflow-hidden text-ellipsis text-nowrap font-semibold text-white transition-colors group-hover:text-gray-300 group-focus:text-gray-300">
                                         {p.title}

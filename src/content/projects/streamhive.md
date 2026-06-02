@@ -1,9 +1,10 @@
 ---
+slug: streamhive
 title: Streamhive
 description: Youtube Clone
+featured: true
 git: https://github.com/sanderhd/streamhive
 languages: PHP, SCSS, JS, MySQL
-slug: streamhive
 thumbnail: streamhive.png
 date: 01/06/2026
 ---
