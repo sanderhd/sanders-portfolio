@@ -83,7 +83,7 @@ export default function Contact() {
 
                 <div
                     className="cf-turnstile"
-                    data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    data-sitekey="0x4AAAAAADdtiGFMKAtTrt4y"
                     data-theme="dark"
                     data-size="flexible"
                     data-callback="onTurnstileSuccess"
