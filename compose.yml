@@ -3,6 +3,8 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+            args:
+                NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
         image: nextjs-standalone-image
         container_name: sander-portfolio-web
         environment: 
