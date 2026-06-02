@@ -1,19 +1,9 @@
 services:
-    nextjs-standalone:
-        build:
-            context: .
-            dockerfile: Dockerfile
-            args:
-                NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-        image: nextjs-standalone-image
-        container_name: sander-portfolio-web
-        environment: 
-            NODE_ENV: production
-            PORT: "3000"
-            NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
-            TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY}
-            RESEND_API_KEY: ${RESEND_API_KEY}
-            DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL}
-        ports:
-            - "3000:3000"
-        restart: unless-stopped
+  nextjs-standalone:
+    build: .
+    container_name: sander-portfolio-web
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
