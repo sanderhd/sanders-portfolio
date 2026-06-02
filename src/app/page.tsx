@@ -1,13 +1,14 @@
 "use client";
 
-import { GitCommit, Mail } from "lucide-react";
+import { FolderGit2, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 const socials = [
-    { href: "https://github.com/sanderhd", label: "Github", icon: GitCommit },
+    { href: "https://github.com/sanderhd", label: "Github", icon: FolderGit2 },
     { href: "mailto:hi@sander.tf", label: "Email", icon: Mail },
 ]
 
@@ -23,20 +24,43 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-                <div className="flex min-h-screen flex-col items-center justify-center gap-6">
-                    <h1 className="text-3xl font-bold text-white">Comming soon®</h1>
-                    
-                    <div className="flex flex-wrap justify-center gap-3">
-                        {socials.map(({ href, label, icon: Icon }) => (
-                            <Link 
-                                key={label}
-                                href={href}
-                                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/80 transition hover:bg-white/10 hover:border-white/20"
+                <div className="flex min-h-screen items-center justify-center">
+                    <div className="flex flex-col md:flex-row items-center gap-8">
+                        
+                        <Image
+                            src="/pfp.jpg"
+                            width={120}
+                            height={120}
+                            alt="Profile Picture"
+                            className="rounded-2xl"
+                        />
+
+                        <div className="text-center md:text-left">
+                            <Link
+                                href="https://github.com/sanderhd"
+                                target="_blank"
+                                className="text-3xl font-bold text-white transition duration-300 hover:text-white/70 hover:scale-105 inline-block"
                             >
-                                <Icon size={14} />
-                                {label}
+                                Sander
                             </Link>
-                        ))}
+
+                            <p className="mt-2 text-white/70 max-w-md">
+                                Welcome to my personal website! Explore things about me & my projects!
+                            </p>
+
+                            <div className="mt-4 flex flex-wrap justify-center md:justify-start gap-3">
+                                {socials.map(({ href, label, icon: Icon }) => (
+                                    <Link
+                                        key={label}
+                                        href={href}
+                                        className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/80 transition hover:bg-white/10 hover:border-white/20"
+                                    >
+                                        <Icon size={14} />
+                                        {label}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </motion.section>
