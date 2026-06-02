@@ -5,12 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FolderGit2, Mail } from "lucide-react";
-import { FaCss3, FaHtml5, FaSass, FaJs, FaPhp, FaGit, FaLinux } from "react-icons/fa";
+import { FaCss3, FaHtml5, FaSass, FaJs, FaPhp, FaGit, FaGithub, FaLinux } from "react-icons/fa";
 import { DiMysql } from "react-icons/di";
 import { RiNextjsFill } from "react-icons/ri";
 
 const socials = [
-    { href: "https://github.com/sanderhd", label: "Github", icon: FolderGit2 },
+    { href: "https://github.com/sanderhd", label: "Github", icon: FaGithub },
     { href: "mailto:hi@sander.tf", label: "Email", icon: Mail },
 ];
 
