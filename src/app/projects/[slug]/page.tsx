@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navigation";
 import { ArrowLeft, FolderGit2 } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }>; }) {
     const { slug } = await params;
@@ -57,7 +58,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 target="_blank"
                                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/80 transition hover:bg-white/10 hover:border-white/20"
                             >
-                                <FolderGit2 size={14} />
+                                <FaGithub size={14} />
                                 Repository
                             </Link>
                         )}
