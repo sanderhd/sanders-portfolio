@@ -1,6 +1,5 @@
 import { getAllProjects } from "@/lib/projects";
 import ProjectList from "@/components/ProjectsList";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navigation";
 
 export default function ProjectsPage() {
@@ -11,8 +10,6 @@ export default function ProjectsPage() {
             <Navbar />
 
             <ProjectList projects={projects} />
-
-            <Footer />
         </div>
     )
 }

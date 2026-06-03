@@ -22,7 +22,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                 initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col items-center gap-6 px-4 py-75"
+                className="flex flex-col items-center gap-6 px-4 pt-32"
             >
                 <h1 className="text-3xl font-bold text-white">Projects</h1>
                 <h2 className="text-sm text-white/40 font-normal">

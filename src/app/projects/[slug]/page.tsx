@@ -1,11 +1,13 @@
 import { getProjectBySlug } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navigation";
-import { ArrowLeft, FolderGit2 } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { ArrowLeft } from "lucide-react";
+import { FaGithub, FaSitemap } from "react-icons/fa";
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }>; }) {
     const { slug } = await params;
@@ -52,6 +54,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 {p.date}
                             </span>
                         )}
+                        {p.demo && (
+                            <Link
+                                href={p.demo}
+                                target="_blank"
+                                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/80 transition hover:bg-white/10 hover:border-white/20"
+                            >
+                                <FaSitemap size={14} />
+                                Demo
+                            </Link>
+                        )}
                         {p.git && (
                             <Link
                                 href={p.git}
@@ -80,17 +92,30 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
                 <div className="border-t border-white/10 mb-10" />
 
-                <div className="prose prose-invert prose-sm max-w-none
-                    prose-headings:text-white prose-headings:font-semibold
-                    prose-p:text-white/70 prose-p:leading-relaxed
-                    prose-a:text-white/80 prose-a:underline prose-a:underline-offset-2 hover:prose-a:text-white
-                    prose-code:text-white/80 prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs
-                    prose-pre:bg-white/5 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl
-                    prose-strong:text-white
-                    prose-li:text-white/70
-                    prose-hr:border-white/10"
+                <div
+                    className="
+                        prose prose-invert max-w-none
+
+                        prose-h1:text-4xl
+                        prose-h1:font-bold
+
+                        prose-h2:text-3xl
+                        prose-h2:font-semibold
+
+                        prose-h3:text-2xl
+                        prose-h3:font-semibold
+
+                        prose-p:text-white/70
+                        prose-p:leading-relaxed
+
+                        prose-li:text-white/70
+                        prose-strong:text-white
+                        prose-hr:border-white/10
+                    "
                 >
-                    <ReactMarkdown>{content}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                        {content}
+                    </ReactMarkdown>
                 </div>
             </div>
         </div>
