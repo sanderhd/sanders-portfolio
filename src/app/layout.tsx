@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 const spaceGrotesk = localFont({
@@ -58,7 +59,9 @@ export default function RootLayout({
         <html
             lang="en"
             className={`${spaceGrotesk.variable} h-full antialiased`}
-        >
+        > 
+            <Analytics />
+            
             <body className="min-h-full flex flex-col">
                 {children}
             </body>
