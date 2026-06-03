@@ -1,51 +1,21 @@
 import Navbar from "@/components/Navigation";
 import StatusClient from "@/components/StatusClient";
+import { checkService } from "@/lib/checkService";
+import { recordStatus, getHistory } from "@/lib/statusStore";
+import { SERVICES } from "@/lib/checkService";
 
-export const revalidate = 60;
-
-export interface Service {
-    name: string;
-    url: string;
-}
-
-export interface ServiceStatus {
-    name: string;
-    url: string;
-    online: boolean;
-    responseTime: number | null;
-}
-
-const SERVICES: Service[] = [
-    { name: "Portfolio", url: "https://sander.tf" },
-    { name: "Streamhive", url: "https://streamhive.sander.tf" },
-];
-
-async function checkService(service: Service): Promise<ServiceStatus> {
-    const start = Date.now();
-
-    try {
-        const res = await fetch(service.url, {
-            method: "HEAD",
-            next: { revalidate: 0 },
-            signal: AbortSignal.timeout(5000),
-        });
-        return {
-            ...service,
-            online: res.ok,
-            responseTime: Date.now() - start,
-        };
-    } catch {
-        return {
-            ...service,
-            online: false,
-            responseTime: null
-        };
-    }
-}
+export const revalidate = 0;
 
 export default async function StatusPage() {
-    const statuses = await Promise.all(SERVICES.map(checkService));
-    const allOnline = statuses.every((s) => s.online);
+    const statusses = await Promise.all(SERVICES.map(checkService));
+    statusses.forEach(recordStatus);
+
+    const withHistory = statusses.map((s) => ({
+        ...s,
+        history: getHistory(s.name),
+    }));
+
+    const allOnline = statusses.every((s) => s.online);
 
     return (
         <div className="min-h-screen text-white">
@@ -68,9 +38,7 @@ export default async function StatusPage() {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                    {statuses.map((s) => (
-                        <StatusClient key={s.name} service={s} />
-                    ))}
+                    <StatusClient initial={withHistory} />
                 </div>
 
                 <p className="text-white/20 text-xs mt-10 text-center">

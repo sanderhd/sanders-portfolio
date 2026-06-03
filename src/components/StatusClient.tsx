@@ -1,36 +1,21 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import { ServiceStatus } from "@/app/status/page";
+import { HistoryEntry } from "@/lib/statusStore";
 
-const HISTORY_KEY = (name: string) => `status_history_${name}`;
-const MAX_HISTORY = 30;
-
-interface HistoryEntry {
+export interface ServiceWithHistory {
+    name: string;
+    url: string;
     online: boolean;
     responseTime: number | null;
-    timestamp: number;
+    history: HistoryEntry[];
 }
 
-export default function StatusClient({ service }: { service: ServiceStatus }) {
-    const [history, setHistory] = useState<HistoryEntry[]>([]);
+const MAX_HISTORY = 30;
 
-    useEffect(() => {
-        const stored = localStorage.getItem(HISTORY_KEY(service.name));
-        const prev: HistoryEntry[] = stored ? JSON.parse(stored) : [];
-
-        const updated = [
-            ...prev,
-            { online: service.online, responseTime: service.responseTime, timestamp: Date.now() },
-        ].slice(-MAX_HISTORY);
-
-        localStorage.setItem(HISTORY_KEY(service.name), JSON.stringify(updated));
-        setHistory(updated);
-    }, [service]);
-
+function ServiceCard({ service }: { service: ServiceWithHistory }) {
     const padded = [
-        ...Array(MAX_HISTORY - history.length).fill(null),
-        ...history,
+        ...Array(MAX_HISTORY - service.history.length).fill(null),
+        ...service.history,
     ];
 
     return (
@@ -61,7 +46,11 @@ export default function StatusClient({ service }: { service: ServiceStatus }) {
                 {padded.map((entry, i) => (
                     <div
                         key={i}
-                        title={entry ? `${entry.online ? "Online" : "Offline"} · ${entry.responseTime ?? "—"}ms · ${new Date(entry.timestamp).toLocaleTimeString("nl-NL")}` : "No data"}
+                        title={
+                            entry
+                                ? `${entry.online ? "Online" : "Offline"} · ${entry.responseTime ?? "—"}ms · ${new Date(entry.timestamp).toLocaleTimeString("nl-NL")}`
+                                : "No data"
+                        }
                         className={`h-6 flex-1 rounded-sm transition-colors ${
                             entry === null
                                 ? "bg-white/5"
@@ -77,5 +66,33 @@ export default function StatusClient({ service }: { service: ServiceStatus }) {
                 <span className="text-xs text-white/20">now</span>
             </div>
         </div>
+    );
+}
+
+export default function StatusClient({ initial }: { initial: ServiceWithHistory[] }) {
+    const [statuses, setStatuses] = useState<ServiceWithHistory[]>(initial);
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            try {
+                const res = await fetch("/api/status");
+                if (res.ok) {
+                    const data = await res.json();
+                    setStatuses(data);
+                }
+            } catch {
+                // yes..
+            }
+        }, 30_000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <>
+            {statuses.map((s) => (
+                <ServiceCard key={s.name} service={s} />
+            ))}
+        </>
     );
 }
