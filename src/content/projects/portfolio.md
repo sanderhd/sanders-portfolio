@@ -1,12 +1,23 @@
 ---
 slug: portfolio
 title: Sander's Portfolio
-description: My Portfolio
+description: My personal portfolio website
 featured: false
 git: https://github.com/sanderhd/sanders-portfolio
-languages: [NextJS, TS, TailwindCSS]
+demo: https://sander.tf/
+languages: [Next.Js, TypeScript, Tailwind CSS]
 thumbnail: portfolio.png
-date: TBC
+date: On going
 ---
 
-## Info
+## About
+
+Sander's Portfolio is the fourth iteration of my personal portfolio website.  
+Every version improves on the previous one, because a portfolio is never truly finished - it evolves as I grow as a developer.
+
+## Features
+
+- Built with Next.js for performance and flexibility
+- Styled using Tailwind CSS
+- Fully written in TypeScript for type safety
+- Continuously iterated and improved over time

@@ -24,3 +24,5 @@ The main focus of Streamhive was understanding OOP PHP coding.
 - Custom video player
 - Categories
 - Responsive UI
+- Google Login
+- Captcha

@@ -29,7 +29,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                     I've published <span className="text-gray-400 font-semibold">{repoCount ?? "..."}</span> public projects on my <Link href="https://github.com/sanderhd" key="github" className="text-gray-300 font-bold transition hover:text-gray-400 ">github</Link>
                 </h2>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-4xl">
+                <div className="grid grid-cols-2 gap-4 w-full max-w-4xl auto-rows-fr">
                     {projects.map((p) => (
                         <Link key={p.slug} href={`/projects/${p.slug}`} className="group outline-0">
                             <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-colors hover:bg-white/10 group-focus:border-white/20 group-focus:bg-white/10 min-w-64">
