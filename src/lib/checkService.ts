@@ -1,6 +1,5 @@
 export const SERVICES = [
-    { name: "Portfolio", url: "https://sander.tf" },
-    { name: "Streamhive", url: "https://streamhive.sander.tf" },
+    { name: "Portfolio", url: "https://sander.tf" }
 ];
 
 export async function checkService(service: { name: string; url: string }) {
