@@ -31,7 +31,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
 
                 <div className="grid grid-cols-2 gap-4 w-full max-w-4xl auto-rows-fr">
                     {projects.map((p) => (
-                        <Link key={p.slug} href={`/projects/${p.slug}`} className="group outline-0">
+                        <Link key={p.slug} href={`/projects/${p.slug}`} data-umami-event={`${p.title} project card`} className="group outline-0">
                             <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-colors hover:bg-white/10 group-focus:border-white/20 group-focus:bg-white/10 min-w-64">
                                 <div className="relative h-36 w-full">
                                     <Image

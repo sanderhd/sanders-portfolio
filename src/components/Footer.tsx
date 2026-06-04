@@ -25,6 +25,7 @@ export default function Footer() {
                                 <Link
                                     key={link.label}
                                     href={link.href}
+                                    data-umami-event={`${link.label} footer item`}
                                     className="text-sm text-white/50 hover:text-gray-400 transition-colors w-fit"
                                 >
                                     {link.label}

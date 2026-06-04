@@ -49,6 +49,7 @@ export default function Hero({ projects }: any) {
                                 <Link
                                     href="https://github.com/sanderhd"
                                     target="_blank"
+                                    data-umami-event="Hero button"
                                     className="text-3xl font-bold text-white transition duration-300 hover:text-white/70 hover:scale-105 inline-block"
                                 >
                                     Sander
@@ -63,6 +64,7 @@ export default function Hero({ projects }: any) {
                                         <Link
                                             key={label}
                                             href={href}
+                                            data-umami-event={`${label} button`}
                                             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/80 transition hover:bg-white/10 hover:border-white/20"
                                         >
                                             <Icon size={14} />
