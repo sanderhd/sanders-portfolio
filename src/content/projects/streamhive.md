@@ -19,7 +19,7 @@ The main focus of Streamhive was understanding OOP PHP coding.
 ## Features
 
 - Video uploads
-- Like & co ment system
+- Like & comment system
 - User authentication
 - Custom video player
 - Categories
