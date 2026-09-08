@@ -37,7 +37,6 @@ export default function Navbar() {
                     <Link
                         key={link.href}
                         href={link.href}
-                        data-umami-event={`${link.label} navigation`}
                         className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
                             pathname === link.href
                                 ? "bg-white/[0.08] text-white"
@@ -76,7 +75,6 @@ export default function Navbar() {
                                     key={tool.href}
                                     href={tool.href}
                                     onClick={() => setOpen(false)}
-                                    data-umami-event={`${tool.label} dropdown item`}
                                     className={`block rounded-xl px-4 py-1.5 text-sm transition-colors ${
                                         pathname === tool.href
                                             ? "bg-white/[0.08] text-white"
