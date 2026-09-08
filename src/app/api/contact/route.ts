@@ -45,7 +45,6 @@ export async function sendToDiscord({ name, email, message, verification }: any)
 }
 
 export async function POST(req: Request) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
     const { name, email, message, token } = await req.json();
 
     const verification = await verifyTurnstile(token);
@@ -55,6 +54,8 @@ export async function POST(req: Request) {
     }
 
     await sendToDiscord({ name, email, message, verification });
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     await resend.emails.send({
         from: "Contact <notifications@mail.sander.tf>",
