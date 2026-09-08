@@ -8,13 +8,32 @@ import { useEffect, useState } from "react";
 
 export default function ProjectsList({ projects }: { projects: Project[] }) {
     const [repoCount, setRepoCount] = useState<number | null>(null);
+    const [totalStars, setTotalStars] = useState<number | null>(null);
 
     useEffect(() => {
-        fetch("https://api.github.com/users/sanderhd")
-            .then((res) => res.json())
-            .then((data) => setRepoCount(data.public_repos))
-            .catch(() => setRepoCount(null));
+        getGithubStats("sanderhd")
+            .then(({ repoCount, totalStars }) => {
+                setRepoCount(repoCount);
+                setTotalStars(totalStars);
+            })
+            .catch(() => {
+                setRepoCount(null);
+                setTotalStars(null);
+            });
     }, []);
+
+    async function getGithubStats(username: string) {
+        const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`);
+        const repos = await res.json();
+
+        const repoCount = repos.length;
+        const totalStars = repos.reduce(
+            (sum: number, repo: { stargazers_count: number }) => sum + repo.stargazers_count,
+            0
+        );
+
+        return { repoCount, totalStars };
+    }
     
     return (
         <div>
@@ -26,7 +45,9 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
             >
                 <h1 className="text-3xl font-bold text-white">Projects</h1>
                 <h2 className="text-sm text-white/40 font-normal">
-                    I've published <span className="text-gray-400 font-semibold">{repoCount ?? "..."}</span> public projects on my <Link href="https://github.com/sanderhd" key="github" className="text-gray-300 font-bold transition hover:text-gray-400 ">github</Link>
+                    I've published <span className="text-gray-400 font-semibold">{repoCount ?? "..."}</span> public projects on my{" "}
+                    <Link href="https://github.com/sanderhd" key="github" className="text-gray-300 font-bold transition hover:text-gray-400 ">github</Link>{" "}
+                    and I have earned <span className="text-gray-400 font-semibold">{totalStars ?? "..."}</span> stars along the way.
                 </h2>
 
                 <div className="grid grid-cols-2 gap-4 w-full max-w-4xl auto-rows-fr">

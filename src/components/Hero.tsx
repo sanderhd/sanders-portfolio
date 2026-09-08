@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FolderGit2, Mail } from "lucide-react";
-import { FaCss3, FaHtml5, FaSass, FaJs, FaPhp, FaGit, FaGithub, FaLinux } from "react-icons/fa";
+import { FaCss3, FaHtml5, FaSass, FaJs, FaPhp, FaPython, FaGit, FaGithub, FaLinux } from "react-icons/fa";
 import { DiMysql } from "react-icons/di";
 import { RiNextjsFill } from "react-icons/ri";
 
@@ -21,6 +21,7 @@ const skills = [
     { label: "JavaScript", icon: FaJs },
     { label: "NextJS", icon: RiNextjsFill },
     { label: "PHP", icon: FaPhp },
+    { label: "Python", icon: FaPython },
     { label: "MySql", icon: DiMysql },
     { label: "Git", icon: FaGit },
     { label: "Servers", icon: FaLinux },
