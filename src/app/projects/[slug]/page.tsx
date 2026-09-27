@@ -37,6 +37,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                             src={`/thumbnails/${p.thumbnail}`}
                             alt={p.title}
                             fill
+                            sizes="(max-width: 768px) 100vw, 736px"
                             className="object-cover"
                         />
                     </div>

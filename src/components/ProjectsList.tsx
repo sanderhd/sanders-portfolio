@@ -60,6 +60,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                                         alt={p.title}
                                         loading="eager"
                                         fill
+                                        sizes="(max-width: 896px) 50vw, 448px"
                                         className="border-b border-white/10 object-cover"
                                     />
                                 </div>
