@@ -41,6 +41,8 @@ docker compose up --build -d
 ```
 
 The portfolio is available at [http://localhost:3000](http://localhost:3000).
-To enable the contact form, set `TURNSTILE_SECRET_KEY`, `DISCORD_WEBHOOK_URL`,
-and `RESEND_API_KEY` in a `.env` file in the project root before starting the
-container. The `.env` file is not included in the image.
+Copy `.env.example` to `.env` in the project root before starting the container.
+Set `PORT` to change the host port (defaults to `3000`); the container continues
+to listen on port `3000`. To enable the contact form, set `TURNSTILE_SECRET_KEY`,
+`DISCORD_WEBHOOK_URL`, and `RESEND_API_KEY` in the same `.env` file. The `.env`
+file is not included in the image.
