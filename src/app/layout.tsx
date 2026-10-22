@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
-import ErrorReporter from "@/components/ErrorReporter";
 
 const spaceGrotesk = localFont({
     src: [
@@ -58,7 +58,18 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
             <body className="min-h-full flex flex-col">
-                <ErrorReporter />
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-ZFJP5E66SR"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){window.dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-ZFJP5E66SR');
+                    `}
+                </Script>
                 {children}
             </body>
         </html>
