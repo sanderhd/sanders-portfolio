@@ -9,4 +9,6 @@ services:
       TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
       DISCORD_WEBHOOK_URL: ${DISCORD_WEBHOOK_URL:-}
       RESEND_API_KEY: ${RESEND_API_KEY:-}
+      LOKI_URL: ${LOKI_URL:-}
+      ANALYTICS_SALT: ${ANALYTICS_SALT:-}
     restart: unless-stopped

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { logEvent } from "@/lib/analytics";
 
 async function verifyTurnstile(token: string) {
     const res = await fetch(
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
     const verification = await verifyTurnstile(token);
 
     if (!verification.success) {
+        await logEvent("contact", { status: "bot_detected" });
         return NextResponse.json({ error: "Bot detected" }, { status: 400 });
     }
 
@@ -76,6 +78,8 @@ Kind regards,
 Sander
         `,
     });
+
+    await logEvent("contact", { status: "sent" });
 
     return NextResponse.json({ ok: true });
 }

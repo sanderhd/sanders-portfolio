@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
+import Analytics from "@/components/Analytics";
 import "./globals.css";
 
 const spaceGrotesk = localFont({
@@ -70,6 +71,7 @@ export default function RootLayout({
                         gtag('config', 'G-ZFJP5E66SR');
                     `}
                 </Script>
+                <Analytics />
                 {children}
             </body>
         </html>

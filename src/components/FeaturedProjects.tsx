@@ -36,6 +36,7 @@ export default function FeaturedProjects({ projects }: { projects: Project[] }) 
                     <Link
                         key={p.slug}
                         href={`/projects/${p.slug}`}
+                        data-track={`featured-project-${p.slug}`}
                         className="group rounded-xl border border-white/10 bg-white/5 overflow-hidden transition hover:bg-white/10 hover:border-white/20"
                     >
                         <div className="relative h-36 w-full overflow-hidden">

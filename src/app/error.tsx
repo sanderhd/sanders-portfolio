@@ -1,11 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
+import { reportError } from "@/lib/track";
+
 export default function Error({
+    error,
     reset,
 }: {
     error: Error & { digest?: string };
     reset: () => void;
 }) {
+    useEffect(() => {
+        reportError(error, "error-boundary");
+    }, [error]);
+
     return (
         <div className="min-h-screen flex items-center justify-center px-6">
             <div className="text-center">

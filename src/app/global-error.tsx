@@ -1,6 +1,17 @@
 "use client";
 
-export default function GlobalError() {
+import { useEffect } from "react";
+import { reportError } from "@/lib/track";
+
+export default function GlobalError({
+    error,
+}: {
+    error: Error & { digest?: string };
+}) {
+    useEffect(() => {
+        reportError(error, "global-error");
+    }, [error]);
+
     return (
         <html lang="en">
             <body className="min-h-screen flex items-center justify-center bg-black text-white">

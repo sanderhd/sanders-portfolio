@@ -46,3 +46,16 @@ Set `PORT` to change the host port (defaults to `3000`); the container continues
 to listen on port `3000`. To enable the contact form, set `TURNSTILE_SECRET_KEY`,
 `DISCORD_WEBHOOK_URL`, and `RESEND_API_KEY` in the same `.env` file. The `.env`
 file is not included in the image.
+
+## Analytics
+
+Page views, clicks, client errors, server errors and contact form submissions are
+sent as JSON log lines to [Loki](https://grafana.com/oss/loki/) and visualised in Grafana.
+
+- Set `LOKI_URL` (e.g. `http://192.168.178.227:3100`) to enable it; without it nothing is sent.
+- Set `ANALYTICS_SALT` to a random string. Visitors are identified by a hash of
+  IP + user agent + date + salt, so no cookies are used and the id changes daily.
+- Clicks on links and buttons are tracked automatically. Add `data-track="name"` to
+  an element to give it a readable name in the dashboard.
+- The Loki config, Grafana provisioning and the "Portfolio Analytics" dashboard live
+  in [`monitoring/`](monitoring/).
