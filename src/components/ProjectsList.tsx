@@ -50,10 +50,10 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                     and I have earned <span className="text-gray-400 font-semibold">{totalStars ?? "..."}</span> stars along the way.
                 </h2>
 
-                <div className="grid grid-cols-2 gap-4 w-full max-w-4xl auto-rows-fr">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-4xl auto-rows-fr">
                     {projects.map((p) => (
                         <Link key={p.slug} href={`/projects/${p.slug}`} data-track={`project-${p.slug}`} className="group outline-0">
-                            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-colors hover:bg-white/10 group-focus:border-white/20 group-focus:bg-white/10 min-w-64">
+                            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-colors hover:bg-white/10 group-focus:border-white/20 group-focus:bg-white/10">
                                 <div className="relative h-36 w-full">
                                     <Image
                                         src={`/thumbnails/${p.thumbnail}`}
@@ -82,7 +82,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                                     </div>
 
                                     <div className="flex justify-end mt-3">
-                                        <ArrowRight size={14} className="text-white/40 transition-all duration-200 group-hover:translate-x-1 group-hover:text-gray-300 group-focus:translate-x-1 goup-focus:text-gray-300"/>
+                                        <ArrowRight size={14} className="text-white/40 transition-all duration-200 group-hover:translate-x-1 group-hover:text-gray-300 group-focus:translate-x-1 group-focus:text-gray-300"/>
                                     </div>
                                 </div>
                             </div>
